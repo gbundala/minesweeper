@@ -1,0 +1,8 @@
+.grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(127, 161, 150);
+  width: 500px;
+  height: 500px;
+  border: 2px solid rgb(141, 90, 90);
+}
