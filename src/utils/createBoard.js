@@ -15,7 +15,8 @@ export function createBoard() {
       id: idx,
       hasBomb: true,
       countOfAdjacentBombs: null,
-      show: false,
+      shown: false,
+      hasFlag: false,
     };
 
     arrayOfBombs.push(cellObj);
