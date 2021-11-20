@@ -3,10 +3,12 @@ import { createBoard } from "../../utils/createBoard";
 import Cell from "../Cell/Cell";
 import "./Board.css";
 
+// FIXME: Hey hey ,revisit this, even if the React.StrictMode does not
+// cause any errors, we dont want to have import functions here!!!!
 // initializing the count of flags
 let countOfFlags = 0;
 
-export default function Board() {
+export default function Board({ restartGame }) {
   const [grid, setGrid] = useState([]);
   const [gameover, setGameover] = useState(false);
   const [arrayOfCellsToUnveil, setArrayOfCellsToUnveil] = useState([]);
@@ -65,7 +67,7 @@ export default function Board() {
     // systematic manner
     setTimeout(() => {
       //
-      if (currentCellIdx >= 0 && !isCellOnLeftEdge) {
+      if (currentCellIdx > 0 && !isCellOnLeftEdge) {
         const nextNewCellIdx = parseInt(currentCellIdx) - 1;
         const nextNewRecursiveCell = grid[nextNewCellIdx];
 
@@ -97,7 +99,7 @@ export default function Board() {
       }
 
       //
-      if (currentCellIdx <= 98 && !isCellOnRightEdge) {
+      if (currentCellIdx < 98 && !isCellOnRightEdge) {
         const nextNewCellIdx = parseInt(currentCellIdx) + 1;
         const nextNewRecursiveCell = grid[nextNewCellIdx];
         handleCellClick(nextNewCellIdx, nextNewRecursiveCell, grid);
@@ -125,13 +127,13 @@ export default function Board() {
       }
 
       // TODO: REVISIT
-      if (currentCellIdx === 0 || currentCellIdx === 99) {
-        console.log("HELLOQ WORLD");
-        const currentCellValue = grid[currentCellIdx];
-        handleCellClick(currentCellIdx, currentCellValue, grid);
-        indicesOfRecursedCells.push(currentCellIdx);
-      }
-    }, 200);
+      // if (currentCellIdx === 0 || currentCellIdx === 99) {
+      //   console.log("HELLOQ WORLD");
+      //   const currentCellValue = grid[currentCellIdx];
+      //   handleCellClick(currentCellIdx, currentCellValue, grid);
+      //   indicesOfRecursedCells.push(currentCellIdx);
+      // }
+    }, 150);
   }
 
   /******  END OF RECURSIVE CHECK OF ADJADCENT CELLS *****/
@@ -174,8 +176,10 @@ export default function Board() {
       recursivelyCheckAdjacentCells(currentCellIdx, gridWidth, grid);
       //TODO:  revisit this part to explain it
       cell.shown = true;
+      setFlagShowTrigger(!flagShowTrigger);
     } else {
       cell.shown = true;
+      setFlagShowTrigger(!flagShowTrigger);
 
       console.log("WE HAVE STOPPED THE RECURSION", indicesOfRecursedCells);
       setArrayOfCellsToUnveil(indicesOfRecursedCells);
@@ -224,6 +228,7 @@ export default function Board() {
       } else {
         cell.hasFlag = true;
         countOfFlags++;
+        checkingForWinStatus();
       }
     }
 
@@ -242,6 +247,25 @@ export default function Board() {
     setFlagShowTrigger(!flagShowTrigger);
   }
 
+  //Checking for A WIN
+  function checkingForWinStatus() {
+    let countOfMatchedFlagsWithBombs = 0;
+
+    for (let idx = 0; idx < grid.length; idx++) {
+      if (grid[idx].hasBomb && grid[idx].hasFlag) {
+        countOfMatchedFlagsWithBombs++;
+      }
+    }
+
+    if (countOfMatchedFlagsWithBombs === countOfBombs) {
+      console.log("CONGRATULATIONS YOU HAVE WON!!!");
+
+      // TODO: Revisit this if there is any confusion with the loosing
+      // action
+      setGameover(true);
+    }
+  }
+
   /**
    * Creating the Board and setting the Grid array;
    * After the initial render we immediately invoke the createBoard function
@@ -251,8 +275,11 @@ export default function Board() {
   useEffect(() => {
     const gridArray = createBoard();
     console.log(gridArray);
+
     setGrid(gridArray);
-  }, []);
+    setArrayOfCellsToUnveil([]);
+    setArrayOfCellsWithBomb([]);
+  }, [restartGame]);
 
   // FIXME: this ultimately becomes redundant, lets keep the handleClick above
   function handleSmashCell(idx, cell) {
@@ -269,6 +296,7 @@ export default function Board() {
     // setGameover(true);
   }
 
+  // FIXME: delete the below console
   console.log("cells with ");
 
   return (
@@ -306,7 +334,7 @@ export default function Board() {
               }
             }}
           >
-            {isCellHavingBomb && idx}
+            {isCellHavingBomb && "💣"}
           </Cell>
         );
       })}

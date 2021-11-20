@@ -1,3 +1,27 @@
+# How to Play Minesweepers Game
+
+Below are the rules of the Game
+
+## Rules of Minesweepers Game
+
+The game has some rules that needs to be followed for you to WIN. Otherwise, the Game would be Over and you will loose!!
+
+1. Put a flag in all the cells that you think there is a bomb for you to win. Once you put the flags in all the correct cells (i.e. all the cells with a Bomb) you will win the Game! To put a flag on a cell "right click on that cell". You can also hold "control" and click/left click to do the same.
+2. **Do not click on a cell with a bomb** (if you a using trackpad, if you are using a mouse, do not left click). You would need to guess correctly to only click on cells with no bombs in them
+3. Once you click on a cell with Bomb, the game will be over and all the cells with Bombs will be displayed
+4. If you click on a cell with no surrounding bombs, all the surrounding cells will unveil (in a recursive manner) until it reaches the edges of cells with at least one surrounding bomb, then it will stop.
+
+# How to install and run the game on your local machine
+
+This application has been build with React (you can read further below on Getting Started with Create React App).
+
+To run this project on your local environment and play the Minesweepers game, follow the following steps.
+
+1. Clone this repo or download the zip file in your machine.
+2. Through the command line, navigate to the downloaded folder (you may need to unzip it if you have gone with the download option) and run **`npm install`** to install the project dependancies and libraries in your local machine
+3. Once it has completed the installation, then run `npm start` to runs the app in the browser. \
+   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

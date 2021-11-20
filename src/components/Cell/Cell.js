@@ -19,11 +19,11 @@ export default function Cell({
   // to true when it receives a different reveal value
 
   // TODO: Consider implementing the same approach as for show flag instead of having a useEffect
-  useEffect(() => {
-    if (reveal) {
-      setShow(true);
-    }
-  }, [reveal]);
+  // useEffect(() => {
+  //   if (reveal) {
+  //     setShow(true);
+  //   }
+  // }, [reveal]);
 
   // useEffect(() => {
   //   if (cell.showFlag) {
@@ -43,11 +43,12 @@ export default function Cell({
         onSmashCell(idx, cell);
       }}
       className={`cell-wrapper ${cell.hasBomb ? `bomb-grid` : ""} ${
-        show ? `checked-status` : ""
+        cell.shown ? `checked-status` : ""
       }`}
     >
-      {show && cell.countOfAdjacentBombs}
-      {children && "💣"}
+      {cell.shown &&
+        (cell.countOfAdjacentBombs !== 0 ? cell.countOfAdjacentBombs : "")}
+      {children}
       {cell.hasFlag && " 🚩"}
     </div>
   );
