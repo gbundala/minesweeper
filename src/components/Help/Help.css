@@ -1,0 +1,12 @@
+.help-wrapper {
+  border: 2px solid rgb(127, 161, 150);
+  border-radius: 4px;
+  max-width: 500px;
+  margin-top: 56px;
+  padding: 8px;
+}
+
+.help-wrapper p {
+  color: rgb(93, 138, 121);
+  font-size: 1rem;
+}

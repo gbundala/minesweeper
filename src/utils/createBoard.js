@@ -1,12 +1,8 @@
-export function createBoard() {
-  // definition of the width and quantity of bombs variables
-  let gridWidth = 10;
-  let quantityOfBombs = 15;
-
+export function createBoard(gridWidth, quantityOfBombs) {
   // Array of bombs created with the array literal method []
   // then populate the array with the cell objects
   // same is replicated for the arrayofvalidcells
-  //   the we concatenate the two array and sort them randomly
+  // then we concatenate the two array and sort them randomly
   // we use the Math.random() method to randomize the sort
 
   const arrayOfBombs = [];
@@ -29,6 +25,8 @@ export function createBoard() {
       id: idx,
       hasBomb: false,
       countOfAdjacentBombs: null,
+      shown: false,
+      hasFlag: false,
     };
 
     arrayOfValidCells.push(cellObj);

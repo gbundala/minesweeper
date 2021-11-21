@@ -9,9 +9,9 @@ h1 {
   color: whitesmoke;
 }
 
-p {
+.game-details-wrapper p {
   color: rgb(65, 109, 93);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .buttons-wrapper {

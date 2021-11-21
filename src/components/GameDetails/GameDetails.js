@@ -1,19 +1,35 @@
 import React from "react";
 import "./GameDetails.css";
 
-export default function GameDetails({ restartGame, setRestartGame }) {
+export default function GameDetails({
+  restartGame,
+  setRestartGame,
+  quantityOfBombs,
+  setQuantityOfBombs,
+  winStatus,
+  gameover,
+  setShowHelp,
+  showHelp,
+}) {
   return (
     <div className="game-details-wrapper">
-      {/* <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossOrigin="anonymous"
-      /> */}
       <h1>Minesweepers Game</h1>
+
+      {winStatus && <h2>Congratulations you have won! 🎉</h2>}
+      {gameover && (
+        <h2 style={{ color: "palegoldenrod" }}>
+          Ooops you have lost! Try again
+        </h2>
+      )}
       <p>
         Play the Minesweepers Game in the Board above. In case you struggle, you
         may click the help button to get instructions!{" "}
+      </p>
+
+      <p>
+        You can also restart the game whenever you want. Choose the level that
+        you want to play from the drop down menu below. You may want to start at
+        the Beginner level if you don't have much experience with Minesweeper
       </p>
       <div className="buttons-wrapper">
         <button
@@ -23,7 +39,25 @@ export default function GameDetails({ restartGame, setRestartGame }) {
         >
           Restart Game
         </button>
-        <button>Get Help</button>
+        <button
+          onClick={() => {
+            setShowHelp(!showHelp);
+          }}
+        >
+          {showHelp ? "Close Help Box" : "Get Help"}
+        </button>
+        <select
+          onChange={(e) => {
+            setQuantityOfBombs(e.target.value);
+          }}
+          id="gamelevel"
+          name="gamelevel"
+          value={quantityOfBombs}
+        >
+          <option value={5}>Beginner</option>
+          <option value={15}>Medium</option>
+          <option value={30}>Expert</option>
+        </select>
       </div>
     </div>
   );
