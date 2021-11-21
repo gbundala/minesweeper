@@ -13,7 +13,7 @@ export default function Cell({ idx, cell, onSmashCell, children, addingFlag }) {
       onClick={() => {
         onSmashCell(idx, cell);
       }}
-      className={`cell-wrapper ${cell.hasBomb ? `bomb-grid` : ""} ${
+      className={`cell-wrapper ${cell.hasBomb && children ? `bomb-grid` : ""} ${
         cell.shown ? `checked-status` : ""
       }`}
     >
